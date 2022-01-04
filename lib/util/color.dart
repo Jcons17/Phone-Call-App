@@ -11,4 +11,4 @@ const accentColorLight = Color(0xFF00669C);
 
 const backgroundColor = Color(0xFFFAFAFA);
 
-const greyColor = Color(0xFFf8f8f8);
+const greyColor = Color(0xFFe5e5e5);
