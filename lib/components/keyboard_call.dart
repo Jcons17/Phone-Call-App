@@ -59,12 +59,11 @@ class KeyboardCall extends StatelessWidget {
            Expanded(
             flex: 3,
             child:  Center(
-              child: SizedBox(
-                width: 100,
+              child: FractionallySizedBox(
+                widthFactor: 1/3,
                 child: Container(
                   alignment: Alignment.center,
-                  //color:Colors.red,
-                  child: ButtonCall(iconColor: backgroundColor,bgColor: primaryColor,))
+                  child: const ButtonCall(iconColor: backgroundColor,bgColor: primaryColor,))
                 ),
             )
             )

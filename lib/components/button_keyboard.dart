@@ -9,7 +9,8 @@ class ButtonKeyboard extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return InkResponse(
+      radius: 45,
       onTap: (){},
       child: Container(
         child: isNumber 
