@@ -19,7 +19,12 @@ class CallApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,   
         theme: ThemeData(
           backgroundColor: backgroundColor,
-          textTheme:const TextTheme(bodyText1: TextStyle(color: primaryColor,fontSize: 16)) 
+          textTheme:
+          const TextTheme(
+            bodyText1: TextStyle(color: primaryColor,fontSize: 16),
+            subtitle2: TextStyle(color: primaryColor,fontSize: 32),
+            
+            ) 
         ),
         title: 'Material App',
         initialRoute: "navigation",

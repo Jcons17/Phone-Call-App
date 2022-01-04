@@ -1,0 +1,77 @@
+import 'package:appcall/components/button_keyboard.dart';
+import 'package:appcall/components/button_phone.dart';
+import 'package:appcall/util/color.dart';
+import 'package:flutter/material.dart';
+
+class KeyboardCall extends StatelessWidget {
+  const KeyboardCall({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          ...[1,4,7,].map((item) => 
+          Expanded(
+            flex: 4,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ...List.generate(3, (index) => 
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.all(5),
+                      child: ButtonKeyboard(isNumber: true, sign: "${index+item}")
+                      ),
+                  )
+                )
+              ],
+            ),
+          )).toList(),
+          Expanded(
+            flex: 4,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.all(5),
+                    child: const ButtonKeyboard(isNumber: false, sign: "*")
+                  ),    
+                ),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.all(5),
+                    child: const ButtonKeyboard(isNumber: true, sign: "0")
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.all(5),
+                    child: const ButtonKeyboard(isNumber: false, sign: "#")
+                  ),
+                )     
+              ],
+            ),
+          ),
+           Expanded(
+            flex: 3,
+            child:  Center(
+              child: SizedBox(
+                width: 100,
+                child: Container(
+                  alignment: Alignment.center,
+                  //color:Colors.red,
+                  child: ButtonCall(iconColor: backgroundColor,bgColor: primaryColor,))
+                ),
+            )
+            )
+            
+        ],
+      ),
+    );
+  }
+}
+

@@ -1,3 +1,4 @@
+import 'package:appcall/components/keyboard_call.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -16,24 +17,22 @@ class _PhoneCallState extends State<PhoneCall> {
         heightFactor: 1,
         widthFactor: 1,
         child: Container(
-          margin: const EdgeInsets.fromLTRB(10,50,10,10),
+          margin: const EdgeInsets.fromLTRB(10,0,10,10),
           child: Column(
             children:[ 
               Expanded(
-                child: Container(
-                  color: Colors.red,
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  color: Colors.amberAccent,
-                ),
-              ),
-              Expanded(
                 flex: 3,
                 child: Container(
-                  color: Colors.red,
                 ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Container(
+                ),
+              ),
+              const Expanded(
+                flex: 8,
+                child: KeyboardCall()
               )
             ]
           ),
