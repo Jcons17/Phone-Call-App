@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(CallApp());
+void main() => runApp( const CallApp());
 
 class CallApp extends StatelessWidget {
   const CallApp({Key? key}) : super(key: key);
