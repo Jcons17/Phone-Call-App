@@ -4,7 +4,9 @@ import 'package:appcall/util/color.dart';
 import 'package:flutter/material.dart';
 
 class KeyboardCall extends StatelessWidget {
-  const KeyboardCall({Key? key}) : super(key: key);
+  const KeyboardCall({Key? key, this.onTapNumbers}) : super(key: key);
+
+  final Function? onTapNumbers;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class KeyboardCall extends StatelessWidget {
                   Expanded(
                     child: Container(
                       margin: const EdgeInsets.all(5),
-                      child: ButtonKeyboard(isNumber: true, sign: "${index+item}")
+                      child: ButtonKeyboard(onTapNumbers: onTapNumbers ,isNumber: true, sign: "${index+item}")
                       ),
                   )
                 )

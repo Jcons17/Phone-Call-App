@@ -1,4 +1,5 @@
 import 'package:appcall/pages/navigation.dart';
+import 'package:appcall/provider/call_provider.dart';
 import 'package:appcall/provider/navigation_provider.dart';
 import 'package:appcall/util/color.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,8 @@ class CallApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => NavigationProvider())
+        ChangeNotifierProvider(create: (_) => NavigationProvider()),
+        ChangeNotifierProvider(create: (_) => CallProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,   
