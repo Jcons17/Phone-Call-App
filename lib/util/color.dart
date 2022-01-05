@@ -14,3 +14,11 @@ const accentColorLight  =  Color(0xFF5599D3);
 const backgroundColor = Color(0xFFFAFAFA);
 
 const greyColor = Color(0xFFe5e5e5);
+
+const palleteColors = [
+  primaryColor,
+  primaryColorLight,
+  accentColorLight,
+  accentColorDark,
+  accentColor
+];

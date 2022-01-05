@@ -1,9 +1,11 @@
+import 'package:appcall/components/card_contact.dart';
+import 'package:appcall/model/contact_model.dart';
 import 'package:flutter/material.dart';
 
 class ListContacts extends StatelessWidget{
-  const ListContacts({Key? key, required this.widgets}) : super(key: key);
+  const ListContacts({Key? key, required this.contactos}) : super(key: key);
 
-  final List widgets;
+  final List<Contact> contactos;
   @override
   Widget build(BuildContext context) {
     
@@ -14,9 +16,12 @@ class ListContacts extends StatelessWidget{
       child: ListView.custom(
         childrenDelegate: SliverChildBuilderDelegate(
           (context,index){
-            return Container(height: 100,width: double.infinity,color: widgets[index]);
+            return Container(
+              margin: const EdgeInsets.only(bottom: 6),
+              child: CardContact(contact: contactos[index]),
+            );
           },
-          childCount: widgets.length
+          childCount: contactos.length
         ),
         
       ),
