@@ -5,9 +5,11 @@ const primaryColor = Color(0xFFD63964);
 
 const primaryColorLight = Color(0xFFE096A1);
 
-const accentColor = Color(0xFF0A174C);
+const accentColorDark = Color(0xFF0A174C);
 
-const accentColorLight = Color(0xFF00669C);
+const accentColor = Color(0xFF00669C);
+
+const accentColorLight  =  Color(0xFF5599D3);
 
 const backgroundColor = Color(0xFFFAFAFA);
 

@@ -1,3 +1,4 @@
+import 'package:appcall/pages/contacts_page.dart';
 import 'package:appcall/pages/phone_call.dart';
 import 'package:appcall/provider/navigation_provider.dart';
 import 'package:appcall/util/color.dart';
@@ -51,6 +52,7 @@ class _NavigationState extends State<Navigation> {
         controller: _navigationController,
         children:const [
           PhoneCall(),
+          ContactPage(),
 
         ],
 

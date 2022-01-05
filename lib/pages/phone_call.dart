@@ -49,7 +49,7 @@ class _PhoneCallState extends State<PhoneCall> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           IconButton(
-                            icon: const Icon(Icons.more_vert),
+                            icon: const Icon(Icons.more_vert,color: accentColor,),
                             onPressed: (){},
                           ),
                           Expanded(
@@ -67,7 +67,7 @@ class _PhoneCallState extends State<PhoneCall> {
                           ),
                     
                           IconButton(
-                            icon: const Icon(Icons.keyboard_arrow_left),
+                            icon: const Icon(Icons.keyboard_arrow_left,color: accentColor) ,
                             onPressed: (){
                               _callProvider.onTapDeleteNumber();
                             },
