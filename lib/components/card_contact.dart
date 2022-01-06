@@ -1,3 +1,4 @@
+import 'package:appcall/components/button_phone.dart';
 import 'package:appcall/components/photo_contact.dart';
 import 'package:appcall/model/contact_model.dart';
 import 'package:appcall/util/color.dart';
@@ -28,19 +29,20 @@ class CardContact extends StatelessWidget {
                 child: ClipOval(child: ContactImage(contact:contact))
               )
             ),
-            Expanded(child: Align(
-              alignment: const Alignment(-0.7,1),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(contact.firstName + " $lastName", style: const TextStyle(fontSize: 22,color: accentColor,fontWeight: FontWeight.bold),),
-                  Text(contact.numberPhone ,style: const TextStyle(fontSize: 18,color: accentColorLight,fontStyle: FontStyle.italic),)
-                ],
-              ),
-
-            )
-            )
+            Expanded(
+              child: Align(
+                alignment: const Alignment(-0.7,1),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(contact.firstName + " $lastName", style: const TextStyle(fontSize: 22,color: accentColor,fontWeight: FontWeight.bold),),
+                    Text(contact.numberPhone ,style: const TextStyle(fontSize: 18,color: accentColorLight,fontStyle: FontStyle.italic),)
+                  ],
+                ),
+              )
+            ),
+            const AspectRatio(aspectRatio: 1, child: ButtonCall())
           ],
         ),
 

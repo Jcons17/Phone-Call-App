@@ -53,30 +53,27 @@ class _ContactPageState extends State<ContactPage> {
                 builder: (context, snapshot) {
 
                   if (snapshot.data == null) return const Center(child: CircularProgressIndicator());
-                  return ScrollbarTheme(
-                    data: const ScrollbarThemeData( minThumbLength: 10),
-                    child: RawScrollbar(
-                      thumbColor: primaryColorLight,
-                      isAlwaysShown: true,
+                  return RawScrollbar(
+                    thumbColor: primaryColorLight,
+                    isAlwaysShown: true,
+                    controller: _controller,
+                    child: ListView.builder(
                       controller: _controller,
-                      child: ListView.builder(
-                        controller: _controller,
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (context,index){
-                          return Column(
-                            children: [
-                                Container(
-                                  width: 24 ,
-                                  padding: const EdgeInsets.fromLTRB(5,5,0,0),
-                                  child: FittedBox(child: Text(snapshot.data!.entries.toList()[index].key.toUpperCase(),style: const TextStyle(color: primaryColor, fontSize: 32,fontWeight : FontWeight.bold ) ))
-                                  ),
-                                ListContacts(contactos: snapshot.data!.entries.toList()[index].value),
-                              ],
-                            );
-                        }
-                        ),
-                    ),
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context,index){
+                        return Column(
+                          children: [
+                              Container(
+                                width: 24 ,
+                                padding: const EdgeInsets.fromLTRB(5,5,0,0),
+                                child: FittedBox(child: Text(snapshot.data!.entries.toList()[index].key.toUpperCase(),style: const TextStyle(color: primaryColor, fontSize: 32,fontWeight : FontWeight.bold ) ))
+                                ),
+                              ListContacts(contactos: snapshot.data!.entries.toList()[index].value),
+                            ],
+                          );
+                      }
+                      ),
                   );
                 }
               )

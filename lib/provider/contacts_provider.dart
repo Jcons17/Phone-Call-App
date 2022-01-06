@@ -32,9 +32,7 @@ class ContactsProvider extends ChangeNotifier{
   }
 
   Future<Map<String , List<Contact>>> getMapContacts() async {
-
     _listContacts ??= (await getListContacts());
-
     for (var contact in _listContacts!) {
         if (!_mapContacts.containsKey(contact.firstName[0].toUpperCase())){ 
         _mapContacts[contact.firstName[0]] = [contact];

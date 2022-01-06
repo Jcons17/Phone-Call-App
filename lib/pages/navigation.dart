@@ -40,7 +40,7 @@ class _NavigationState extends State<Navigation> {
         items: const [
           BottomNavigationBarItem(label: "Phone Call",icon: Icon(Icons.phone)),
           BottomNavigationBarItem(label: "Contacts",icon: Icon(Icons.contact_phone)),
-          BottomNavigationBarItem(label: "History",icon: Icon(Icons.history))
+          BottomNavigationBarItem(label: "Favorites",icon: Icon(Icons.star))
         ],  
       ) ,
       body: PageView(
