@@ -26,7 +26,7 @@ class CallApp extends StatelessWidget {
           textTheme:
           const TextTheme(
             bodyText1: TextStyle(color: primaryColor,fontSize: 16),
-            subtitle1: TextStyle(color: primaryColor,fontSize: 32),
+            subtitle1: TextStyle(color: primaryColor,fontSize: 32,),
             subtitle2: TextStyle(color: primaryColor,fontSize: 20),
 
             ) 

@@ -16,7 +16,7 @@ class ContactImage extends StatelessWidget {
           child: FittedBox(
             fit:BoxFit.cover,
             child: Text(
-              contact.firstName[0],
+              contact.firstName[0].toUpperCase(),
               style:const TextStyle(color: backgroundColor,fontSize: 50),
             ),
           )
