@@ -16,7 +16,6 @@ class CardContact extends StatelessWidget {
       widthFactor: 1,
       child: Container(
         padding: const EdgeInsets.all(5),
-        constraints:const BoxConstraints(maxHeight:100,minHeight: 50 ),
         height: 75,
         decoration: const BoxDecoration(
           border: Border(bottom: BorderSide(color: greyColor)),        ),
@@ -36,10 +35,10 @@ class CardContact extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(contact.firstName + " $lastName", style: const TextStyle(fontSize: 22,color: accentColor,fontWeight: FontWeight.bold),),
-                  Text(contact.numberPhone, style: const TextStyle(fontSize: 18,color: accentColor,fontStyle: FontStyle.italic),)
-
+                  Text(contact.numberPhone ,style: const TextStyle(fontSize: 18,color: accentColorLight,fontStyle: FontStyle.italic),)
                 ],
               ),
+
             )
             )
           ],
