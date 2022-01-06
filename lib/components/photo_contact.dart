@@ -10,7 +10,6 @@ class ContactImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (contact.email == null){
-
       return Container(
         color: accentColorDark,
         child: Center(

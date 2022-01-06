@@ -11,23 +11,17 @@ class ListContacts extends StatelessWidget{
     
     return Container(
       width: double.infinity,
-      height: double.infinity,
       padding: const EdgeInsets.all(20),
-      child: ListView.custom(
-        childrenDelegate: SliverChildBuilderDelegate(
-          (context,index){
-            return Container(
-              margin: const EdgeInsets.only(bottom: 6),
-              child: CardContact(contact: contactos[index]),
-            );
-          },
-          childCount: contactos.length
-        ),
-        
-      ),
+      child: Column(
+        children: [
+          for (var contacto in contactos)
+            CardContact(contact: contacto),
+        ],
+      )
+          
     );
 
     
   }
 
-}
+} 

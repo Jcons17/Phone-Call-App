@@ -2,9 +2,11 @@ import 'package:appcall/components/empty_contacs.dart';
 import 'package:appcall/components/input_search_contacts.dart';
 import 'package:appcall/components/list_contacts.dart';
 import 'package:appcall/model/contact_model.dart';
+import 'package:appcall/provider/contacts_provider.dart';
 import 'package:appcall/util/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 class ContactPage extends StatefulWidget {
   const ContactPage({Key? key}) : super(key: key);
@@ -31,8 +33,10 @@ class _ContactPageState extends State<ContactPage> {
     Colors.pink,
   ];
 
+
   @override
   Widget build(BuildContext context) {
+    final ContactsProvider _contactProvider = Provider.of<ContactsProvider>(context);
     return Scaffold(
       body: SafeArea(child: 
         Column(
@@ -42,7 +46,44 @@ class _ContactPageState extends State<ContactPage> {
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
               child: SearchContacts(bgColor: primaryColorLight.withOpacity(0.5), labelColor: primaryColor)
             ),
-             Expanded(child: ListContacts(contactos:listContacts))
+            Expanded(child: 
+              FutureBuilder<Map<String,List<Contact>>>(
+                future: _contactProvider.getMapContacts(),
+                builder: (context, snapshot) {
+                  if (snapshot.data == null) return const Center(child: CircularProgressIndicator());
+                  return 
+                  ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context,index){
+                      return Column(
+                        children: [
+                            Container(
+                              width: 24 ,
+                              padding: const EdgeInsets.fromLTRB(5,5,0,0),
+                              child: FittedBox(child: Text(snapshot.data!.entries.toList()[index].key.toUpperCase(),style: Theme.of(context).textTheme.subtitle1,))
+                              ),
+                            ListContacts(contactos: snapshot.data!.entries.toList()[index].value),
+                          ],
+                        );
+                    }
+                    );
+                  
+                    // return ListView.builder(
+                    //   itemBuilder: (context,index) => 
+                    //     FractionallySizedBox(
+                    //       heightFactor: 1,
+                    //       child: Column(
+                    //         children: [
+                    //           Text(snapshot.data!.entries.toList()[index].key),
+                    //           Expanded(child: ListContacts(contactos:snapshot.data!.entries.toList()[index].value)),
+                    //         ],
+                    //       ),
+                    //     ) ,
+                    //   //separatorBuilder: (context,index) =>  Container(),//Text(snapshot.data!.entries.toList()[index].key, style: const TextStyle(color: Colors.red),),
+                    //   itemCount: snapshot.data!.length);
+                }
+              )
+            )
             
           ],
         )
