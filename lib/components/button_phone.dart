@@ -10,9 +10,7 @@ class ButtonCall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        //TODO: Make Function the botton 
-        print("Tap");
+      onTap: (){        
       }, 
       child: Ink(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(50),color: bgColor,),
