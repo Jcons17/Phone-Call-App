@@ -1,4 +1,3 @@
-import 'package:appcall/components/input_search_contacts.dart';
 import 'package:appcall/components/photo_contact.dart';
 import 'package:appcall/components/text_input_contact.dart';
 import 'package:appcall/model/contact_model.dart';
@@ -79,8 +78,16 @@ class _ContactViewState extends State<ContactView> {
               color: primaryColor,
               width: double.maxFinite,
               height: double.maxFinite,
-              child: const Center(
-                child: Icon(Icons.account_circle_rounded)
+              child: Center(
+                child: Stack(   
+                  fit: StackFit.expand,           
+                  children: [
+                    const Center(child: Icon(Icons.account_circle,size: 250,color: greyColor,)),
+                    Align(alignment: Alignment.topLeft, child: IconButton(onPressed: (){Navigator.pop(context);}, icon: const Icon(Icons.close,color: greyColor ,))),
+                    Align(alignment: Alignment.topRight,child: IconButton(onPressed: (){print("save");}, icon: const Icon(Icons.save,color: greyColor ,)))
+                    
+                  ],
+                )
               ),
             )
             ),
@@ -89,7 +96,7 @@ class _ContactViewState extends State<ContactView> {
             child: FractionallySizedBox(
               widthFactor: 0.8,
               child: ListView(
-                padding: EdgeInsets.all(20),
+                padding:const  EdgeInsets.all(20),
                // shrinkWrap: true,
                 children:   [
                     Text("Nombre",style: Theme.of(context).textTheme.bodyText1 ),

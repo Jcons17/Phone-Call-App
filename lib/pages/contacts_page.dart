@@ -2,6 +2,7 @@ import 'package:appcall/components/empty_contacs.dart';
 import 'package:appcall/components/input_search_contacts.dart';
 import 'package:appcall/components/list_contacts.dart';
 import 'package:appcall/model/contact_model.dart';
+import 'package:appcall/pages/contact_view.dart';
 import 'package:appcall/provider/contacts_provider.dart';
 import 'package:appcall/util/color.dart';
 import 'package:flutter/material.dart';
@@ -17,21 +18,6 @@ class ContactPage extends StatefulWidget {
 
 class _ContactPageState extends State<ContactPage> {
 
-  List<Contact> listContacts = [
-    Contact(idContact: 0, firstName: "Julio", numberPhone: "6331321328",lastName: "Cons"),
-    Contact(idContact: 1, firstName: "Rebeca", numberPhone: "6331321328"),
-    Contact(idContact: 2, firstName: "Lenin", numberPhone: "6331321328",),
-
-  ];
-
-  final List<Color> colors = [
-    Colors.yellow,
-    Colors.blue,
-    Colors.green,
-    Colors.red,
-    Colors.purple,
-    Colors.pink,
-  ];
   final _controller = ScrollController();
 
 
@@ -46,6 +32,27 @@ class _ContactPageState extends State<ContactPage> {
               height: 50,
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
               child: SearchContacts(bgColor: primaryColorLight.withOpacity(0.5), labelColor: primaryColor)
+            ),
+            TextButton(
+              onPressed: (){
+                Navigator.push(context,MaterialPageRoute(builder: (context) => const ContactView() ));
+              },
+              child: Container(
+                width: double.maxFinite,
+                height: 50,
+                decoration: BoxDecoration(
+                  border: Border.all(color: primaryColor) 
+                ),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.account_circle_rounded,color: primaryColor,),
+                      Text("   Añadir contacto", style: Theme.of(context).textTheme.bodyText1,),
+                    ],
+                  ),
+                ),
+              ) ,
             ),
             Expanded(child: 
               FutureBuilder<Map<String,List<Contact>>>(

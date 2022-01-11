@@ -24,7 +24,7 @@ class SearchContacts extends StatelessWidget {
           contentPadding: EdgeInsets.zero,
           icon: Icon(Icons.search,color: labelColor,size: 24  ,),
           labelText: "Search contacts",
-          labelStyle: TextStyle(color: labelColor,fontSize: 16),
+          labelStyle: TextStyle(color: labelColor,fontSize: 20),
           floatingLabelBehavior: FloatingLabelBehavior.auto,
           border: InputBorder.none, 
         )
