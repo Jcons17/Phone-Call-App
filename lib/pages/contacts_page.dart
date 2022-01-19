@@ -1,12 +1,10 @@
-import 'package:appcall/components/empty_contacs.dart';
-import 'package:appcall/components/input_search_contacts.dart';
+  import 'package:appcall/components/input_search_contacts.dart';
 import 'package:appcall/components/list_contacts.dart';
 import 'package:appcall/model/contact_model.dart';
 import 'package:appcall/pages/contact_view.dart';
 import 'package:appcall/provider/contacts_provider.dart';
 import 'package:appcall/util/color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class ContactPage extends StatefulWidget {
@@ -20,6 +18,9 @@ class _ContactPageState extends State<ContactPage> {
 
   final _controller = ScrollController();
 
+  void _changeState(){
+    setState((){});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class _ContactPageState extends State<ContactPage> {
             Container(
               height: 50,
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-              child: SearchContacts(bgColor: primaryColorLight.withOpacity(0.5), labelColor: primaryColor)
+              child: SearchContacts(bgColor: primaryColorLight.withOpacity(0.5), onChange: _changeState,labelColor: primaryColor,)
             ),
             TextButton(
               onPressed: (){
