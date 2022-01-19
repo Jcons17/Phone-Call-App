@@ -24,12 +24,15 @@ class ContactsProvider extends ChangeNotifier{
   List<Contact> get listContactsFiltered => _listContactsFiltered;
 
   Future<List<Contact>> getListContacts() async {
+    
     _listContacts = [
       Contact(idContact: 0, firstName: "Julio", numberPhone: "6331321328",lastName: "Cons"),
       Contact(idContact: 0, firstName: "Julio", numberPhone: "6331321452",lastName: "Cons"),
       Contact(idContact: 1, firstName: "Rebeca", numberPhone: "35121"),
       Contact(idContact: 2, firstName: "Lenin", numberPhone: "2135",),
     ];
+
+
 
     _listContacts!.sort((a,b) => a.firstName.toUpperCase().compareTo(b.firstName.toUpperCase()));
 
