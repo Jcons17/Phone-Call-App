@@ -1,14 +1,21 @@
+import 'package:appcall/model/contact_model.dart';
+import 'package:appcall/provider/contacts_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 class SearchContacts extends StatelessWidget {
-  const SearchContacts({Key? key,required this.bgColor,required this.labelColor}) : super(key: key);
+  const SearchContacts({Key? key,required this.bgColor,required this.labelColor, this.onChange ,this.listContacts}) : super(key: key);
 
   final Color bgColor;
   final Color labelColor;
+  final List<Contact>? listContacts;
+  final Function? onChange; 
+
 
   @override
   Widget build(BuildContext context) {
+    final ContactsProvider _contactProvider = Provider.of<ContactsProvider>(context); 
+
     return Container(
       padding:const EdgeInsets.symmetric(horizontal: 15, vertical: 3),
       decoration: BoxDecoration(
@@ -18,6 +25,13 @@ class SearchContacts extends StatelessWidget {
       child: TextFormField(
         cursorColor: labelColor,
         style: Theme.of(context).textTheme.subtitle2,
+        onChanged: (value){
+
+          _contactProvider.onUpdateChangeList(true);
+          _contactProvider.filterListByNumber(value);
+          _contactProvider.filterListByName(value);
+          if (onChange != null) onChange!();
+        },
         
         decoration: InputDecoration(
           isDense: true,
