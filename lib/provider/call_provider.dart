@@ -4,10 +4,10 @@ class CallProvider extends ChangeNotifier{
 
   TextEditingController editingControllerNumber = TextEditingController(text: "");
 
+
   void onTapNumberKeyboard(String value){
     int baseOffSet = editingControllerNumber.selection.baseOffset;
     int extent = editingControllerNumber.selection.extentOffset;
-    int textLength =editingControllerNumber.text.length;
     String text = editingControllerNumber.text;
 
     if(baseOffSet == -1 && extent == -1){
@@ -19,8 +19,6 @@ class CallProvider extends ChangeNotifier{
         editingControllerNumber.selection = TextSelection(baseOffset: baseOffSet +1 , extentOffset: extent+1); 
       }
       else{
-        print(baseOffSet );
-        print(extent);
         editingControllerNumber.text = text.substring(0,baseOffSet) + value + text.substring(extent);
         editingControllerNumber.selection = TextSelection(baseOffset: baseOffSet +1 , extentOffset: baseOffSet+1); 
       }
