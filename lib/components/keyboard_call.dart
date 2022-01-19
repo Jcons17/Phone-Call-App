@@ -46,7 +46,7 @@ class KeyboardCall extends StatelessWidget {
                 Expanded(
                   child: Container(
                     margin: const EdgeInsets.all(5),
-                    child: const ButtonKeyboard(isNumber: true, sign: "0")
+                    child:  ButtonKeyboard(onTapNumbers: onTapNumbers ,isNumber: true, sign: "0")
                   ),
                 ),
                 Expanded(
