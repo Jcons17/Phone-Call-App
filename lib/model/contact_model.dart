@@ -2,11 +2,11 @@ import 'dart:convert';
 
 class Contact {
 
-  final int idContact;
+  final int? idContact;
   final String firstName;
   final String? lastName;
   final String numberPhone;
-  final String? pathImage;
+  String? pathImage;
   final String? email;  
 
   Contact({
@@ -50,7 +50,7 @@ class Contact {
 
   factory Contact.fromMap(Map<String, dynamic> map) {
     return Contact(
-      idContact: map['idContact']?.toInt() ?? 0,
+      idContact: map['idContact']?.toInt(),
       firstName: map['firstName'] ?? '',
       lastName: map['lastName'],
       numberPhone: map['numberPhone'] ?? '',
@@ -65,7 +65,7 @@ class Contact {
 
   @override
   String toString() {
-    return 'Contact(firstName: $firstName, numberPhone: $numberPhone)';
+    return 'Contact(idContact: $idContact, firstName: $firstName, lastName: $lastName, numberPhone: $numberPhone, pathImage: $pathImage, email: $email)';
   }
 
   @override

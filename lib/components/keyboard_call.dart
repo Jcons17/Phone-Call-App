@@ -1,7 +1,9 @@
 import 'package:appcall/components/button_keyboard.dart';
 import 'package:appcall/components/button_phone.dart';
+import 'package:appcall/provider/call_provider.dart';
 import 'package:appcall/util/color.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class KeyboardCall extends StatelessWidget {
   const KeyboardCall({Key? key, this.onTapNumbers}) : super(key: key);
@@ -65,7 +67,7 @@ class KeyboardCall extends StatelessWidget {
                 widthFactor: 1/3,
                 child: Container(
                   alignment: Alignment.center,
-                  child: const ButtonCall(iconColor: backgroundColor,bgColor: primaryColor,))
+                  child: ButtonCall(iconColor: backgroundColor,bgColor: primaryColor,phoneNumber: Provider.of<CallProvider>(context).editingControllerNumber.text,))
                 ),
             )
             )

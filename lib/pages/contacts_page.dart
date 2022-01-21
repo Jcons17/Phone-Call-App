@@ -1,4 +1,5 @@
-  import 'package:appcall/components/input_search_contacts.dart';
+  import 'package:appcall/components/empty_contacs.dart';
+import 'package:appcall/components/input_search_contacts.dart';
 import 'package:appcall/components/list_contacts.dart';
 import 'package:appcall/model/contact_model.dart';
 import 'package:appcall/pages/contact_view.dart';
@@ -18,9 +19,7 @@ class _ContactPageState extends State<ContactPage> {
 
   final _controller = ScrollController();
 
-  void _changeState(){
-    setState((){});
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class _ContactPageState extends State<ContactPage> {
             Container(
               height: 50,
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-              child: SearchContacts(bgColor: primaryColorLight.withOpacity(0.5), onChange: _changeState,labelColor: primaryColor,)
+              child: SearchContacts(bgColor: primaryColorLight.withOpacity(0.5), labelColor: primaryColor,)
             ),
             TextButton(
               onPressed: (){
@@ -49,18 +48,24 @@ class _ContactPageState extends State<ContactPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Icon(Icons.account_circle_rounded,color: primaryColor,),
-                      Text("   Añadir contacto", style: Theme.of(context).textTheme.bodyText1,),
+                      Text("   Add contact", style: Theme.of(context).textTheme.bodyText1,),
                     ],
                   ),
                 ),
               ) ,
             ),
             Expanded(child: 
-              FutureBuilder<Map<String,List<Contact>>>(
-                future: _contactProvider.getMapContacts(),
+              FutureBuilder<List<Contact>>(
+                future: _contactProvider.getListContacts(),
                 builder: (context, snapshot) {
 
                   if (snapshot.data == null) return const Center(child: CircularProgressIndicator());
+                  if (snapshot.data!.isEmpty) return const EmptyContacts();
+
+                  bool conditionListFiltered = _contactProvider.listContactsFiltered.isNotEmpty;
+                  var list = conditionListFiltered ? _contactProvider.listContactsFiltered : snapshot.data!;
+                  var mapContacts = _contactProvider.getMapContacts(list);
+
                   return RawScrollbar(
                     thumbColor: primaryColorLight,
                     isAlwaysShown: true,
@@ -68,16 +73,16 @@ class _ContactPageState extends State<ContactPage> {
                     child: ListView.builder(
                       controller: _controller,
                       physics: const BouncingScrollPhysics(),
-                      itemCount: snapshot.data!.length,
+                      itemCount: mapContacts.length,
                       itemBuilder: (context,index){
                         return Column(
                           children: [
                               Container(
                                 width: 24 ,
                                 padding: const EdgeInsets.fromLTRB(5,5,0,0),
-                                child: FittedBox(child: Text(snapshot.data!.entries.toList()[index].key.toUpperCase(),style: const TextStyle(color: primaryColor, fontSize: 32,fontWeight : FontWeight.bold ) ))
+                                child: Text(mapContacts.entries.toList()[index].key.toUpperCase(),style: const TextStyle(color: primaryColor, fontSize: 32,fontWeight : FontWeight.bold ) )
                                 ),
-                              ListContacts(contactos: snapshot.data!.entries.toList()[index].value),
+                              ListContacts(contactos: mapContacts.entries.toList()[index].value),
                             ],
                           );
                       }

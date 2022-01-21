@@ -14,23 +14,12 @@ class FavoritePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final ContactsProvider _contactsProvider = Provider.of<ContactsProvider>(context);
     return SafeArea(  
-      child: Column(
-        children: [
-          Container(
-              height: 50,
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-              child: SearchContacts(bgColor: primaryColorLight.withOpacity(0.5), labelColor: primaryColor)
-            ),
-          Expanded(
-            child: FutureBuilder<List<Contact>>(
-              future: _contactsProvider.getListContacts(),
-              builder: (context, snapshot) {
-                if(!snapshot.hasData) return const ProgressCircular();
-                return GridFavoritesContacts(listContacts: snapshot.data!,);
-              }
-            ),
-          )  
-        ],
+      child: FutureBuilder<List<Contact>>(
+        future: _contactsProvider.getListContacts(),
+        builder: (context, snapshot) {
+          if(!snapshot.hasData) return const ProgressCircular();
+          return GridFavoritesContacts(listContacts: snapshot.data!,);
+        }
       )
 
       );

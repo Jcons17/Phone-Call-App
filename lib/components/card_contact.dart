@@ -55,7 +55,7 @@ class CardContact extends StatelessWidget {
                 ),
               )
             ),
-            const AspectRatio(aspectRatio: 1, child: ButtonCall())
+            AspectRatio(aspectRatio: 1, child: ButtonCall(phoneNumber: contact.numberPhone,))
           ],
         ),
 

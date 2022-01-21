@@ -29,7 +29,6 @@ class CallProvider extends ChangeNotifier{
   void onTapDeleteNumber(){
     int baseOffSet = editingControllerNumber.selection.baseOffset;
     int extent = editingControllerNumber.selection.extentOffset;
-    int textLength =editingControllerNumber.text.length;
     String text = editingControllerNumber.text;
 
     if(baseOffSet == -1 && extent == -1){

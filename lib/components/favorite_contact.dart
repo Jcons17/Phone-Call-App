@@ -1,8 +1,6 @@
 import 'package:appcall/components/photo_contact.dart';
 import 'package:appcall/model/contact_model.dart';
-import 'package:appcall/util/color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class FavoriteContact extends StatelessWidget {
   const FavoriteContact({Key? key,required this.contact}) : super(key: key);

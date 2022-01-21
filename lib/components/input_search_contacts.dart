@@ -14,8 +14,7 @@ class SearchContacts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ContactsProvider _contactProvider = Provider.of<ContactsProvider>(context); 
-
+    final ContactsProvider _contactProvider = Provider.of<ContactsProvider>(context,listen: false); 
     return Container(
       padding:const EdgeInsets.symmetric(horizontal: 15, vertical: 3),
       decoration: BoxDecoration(
@@ -26,11 +25,7 @@ class SearchContacts extends StatelessWidget {
         cursorColor: labelColor,
         style: Theme.of(context).textTheme.subtitle2,
         onChanged: (value){
-
-          _contactProvider.onUpdateChangeList(true);
-          _contactProvider.filterListByNumber(value);
           _contactProvider.filterListByName(value);
-          if (onChange != null) onChange!();
         },
         
         decoration: InputDecoration(

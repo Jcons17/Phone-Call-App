@@ -1,6 +1,7 @@
  
 import 'dart:collection';
 
+import 'package:appcall/database/database_provider.dart';
 import 'package:appcall/model/contact_model.dart';
 import 'package:appcall/util/maps.dart';
 import 'package:flutter/widgets.dart';
@@ -12,105 +13,81 @@ class ContactsProvider extends ChangeNotifier{
 
   List<Contact>  _listContactsFiltered = [];
 
-
-
-  final HashMap<String, List<Contact>> _mapContacts = HashMap();
-
-  bool _changeList = false;
-
-
   get listContacts => _listContacts;
 
   List<Contact> get listContactsFiltered => _listContactsFiltered;
 
   Future<List<Contact>> getListContacts() async {
     
-    _listContacts = [
-      Contact(idContact: 0, firstName: "Julio", numberPhone: "6331321328",lastName: "Cons"),
-      Contact(idContact: 0, firstName: "Julio", numberPhone: "6331321452",lastName: "Cons"),
-      Contact(idContact: 1, firstName: "Rebeca", numberPhone: "35121"),
-      Contact(idContact: 2, firstName: "Lenin", numberPhone: "2135",),
-    ];
+    
+    await DBprovider.db.database;
 
-
+    final _contactos = await DBprovider.db.getAllContacts();
+    
+    _listContacts = _contactos;
 
     _listContacts!.sort((a,b) => a.firstName.toUpperCase().compareTo(b.firstName.toUpperCase()));
 
-
     return _listContacts!;
-
-
   }
 
-  Future<Map<String , List<Contact>>> getMapContacts() async {
-    List<Contact> listContacts = [];
-    if (_mapContacts.isEmpty){ 
-      listContacts = (await getListContacts());
-      _mapearContactos(listContacts);
-    }else if(_changeList){
-      listContacts = _listContactsFiltered;
-      _mapContacts.clear();
-      _mapearContactos(listContacts);
-      _listContactsFiltered.clear();
-      _changeList = false;
-    }
-    return _mapContacts;
-  }
+  Map<String , List<Contact>> getMapContacts(List<Contact> lista ){
+    Map<String, List<Contact>> _mapContacts = {};
 
-  void _mapearContactos(List<Contact> listContacts) {
-    for (Contact contact in listContacts) {
+    for (Contact contact in lista) {
       if (!_mapContacts.containsKey(contact.firstName[0].toUpperCase())){ 
         _mapContacts[contact.firstName[0].toUpperCase()] = [contact];
       }else{
         if(!_mapContacts[contact.firstName[0].toUpperCase()]!.contains(contact)) _mapContacts[contact.firstName[0].toUpperCase()]!.add(contact);
       }
     }
-  }
-
-  void filterListByNumber(String number) {
-    _listContactsFiltered =  _listContactsFiltered + _listContacts!.where((contact) => contact.numberPhone.startsWith(number.toUpperCase())).toList();
+    return _mapContacts;
   }
 
   void filterListByName(String name) {
-    
     _listContactsFiltered =  _listContactsFiltered + _listContacts!.where((contact) => contact.firstName.toUpperCase().startsWith(name.toUpperCase())).toList();
+    //_listContactsFiltered =  _listContactsFiltered + _listContacts!.where((contact) => contact.numberPhone.startsWith(name.toUpperCase())).toList();
+
+    notifyListeners();
   }
 
-  void filterContacts(String number) {
+  void clearfilterList() {
+    _listContactsFiltered.clear();
+  }
 
-    List<List<Contact>>  _listContactsFilteredPhone = [_listContacts!];
-    int index = 0;
-    for (String letter in number.characters) {
-      int numero = int.parse(letter);
-      String mapNumero = mapKeyboardNumbers[numero]!;
-      List<Contact> flatList = [];
-      for(String mapChar in mapNumero.characters){
-        var listName =  _listContactsFilteredPhone.last.where((contact) {
-              var nameLetter = contact.firstName.toUpperCase();
-              var firstLetter = nameLetter.substring(0,index) + mapChar;
-              return nameLetter.startsWith(firstLetter);
-              }).toList();
-        flatList = flatList + listName;
-        }
-      if(flatList.isNotEmpty) _listContactsFilteredPhone.add(flatList);
-      //if(flatList.isEmpty) _listContactsFilteredPhone = [listContacts];
+  void filterContactsByNumber(String number) {
 
-      index = index + 1;
-    }    
-
-    _listContactsFilteredPhone[0] = [];
-
-    _listContactsFiltered =  _listContactsFilteredPhone.last; 
+    _listContactsFiltered = _listContacts!.where((contact) => contact.numberPhone.startsWith(number.toUpperCase())).toList(); 
   }
 
   void filterContactByName(String name) {
     _listContactsFiltered =  _listContacts!.where((contact) => contact.firstName.toUpperCase().startsWith(name.toUpperCase())).toList();
   }
 
-  void onUpdateChangeList(bool value){
-    _changeList = value;
+  Future<int> addContactToDataBase(Map<String,String> mapContact) async {
+    final id = await DBprovider.db.addContact(mapContact);
     notifyListeners();
-  }  
+    return id;
+  }
+
+  Future<int> eliminateContactDatabase(int id) async {
+    final state = await DBprovider.db.deleteContact(id);
+    notifyListeners();
+    return state;
+  }
+
+  Future<int> updateContactDatabase(Map<String,String> mapContact, int id) async {
+    final state = await DBprovider.db.updateContact(mapContact, id);
+    notifyListeners();
+    return state;
+  }
+
+  Future<int> updatePhotoContactDatabase(String path, int id) async {
+    print(path);
+    final state = await DBprovider.db.updatePhotoContact(path, id);
+    notifyListeners();
+    return state;
+  }
 
 
 

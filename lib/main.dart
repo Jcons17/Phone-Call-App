@@ -1,4 +1,3 @@
-import 'package:appcall/pages/hero.dart';
 import 'package:appcall/pages/navigation.dart';
 import 'package:appcall/provider/call_provider.dart';
 import 'package:appcall/provider/contacts_provider.dart';
@@ -36,8 +35,6 @@ class CallApp extends StatelessWidget {
         initialRoute: "navigation",
         routes: {
           "navigation" : (context) => const Navigation(),
-          "first" : (context) =>   FirstScreen()
-
         },
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:appcall/components/keyboard_call.dart';
 import 'package:appcall/components/list_contacts.dart';
+import 'package:appcall/pages/contact_view.dart';
 import 'package:appcall/provider/call_provider.dart';
 import 'package:appcall/provider/contacts_provider.dart';
 import 'package:appcall/util/color.dart';
@@ -23,7 +24,7 @@ class _PhoneCallState extends State<PhoneCall> {
     ContactsProvider _contactProvider = Provider.of<ContactsProvider>(context);
 
       _callProvider.editingControllerNumber.addListener((){
-        _contactProvider.filterContacts(_callProvider.editingControllerNumber.text);
+        _contactProvider.filterContactsByNumber(_callProvider.editingControllerNumber.text);
         
         if(_callProvider.editingControllerNumber.text == ""){
           setState(() {
@@ -31,6 +32,7 @@ class _PhoneCallState extends State<PhoneCall> {
           });
         }
       });
+
     return GestureDetector(
       onTap: (){
         FocusScopeNode currentFocus = FocusScope.of(context);
@@ -59,7 +61,9 @@ class _PhoneCallState extends State<PhoneCall> {
                       children: [
                         IconButton(
                           icon: const Icon(Icons.more_vert,color: accentColor,),
-                          onPressed: (){},
+                          onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (_) => ContactView(number:_callProvider.editingControllerNumber.text )));
+                          },
                         ),
                         Expanded(
                           child: Center(
@@ -81,8 +85,7 @@ class _PhoneCallState extends State<PhoneCall> {
                           icon: const Icon(Icons.keyboard_arrow_left,color: accentColor) ,
                           onPressed: (){
                             _callProvider.onTapDeleteNumber();
-                          },
-                          
+                          }
                         )
                       ],
                     ),
