@@ -11,19 +11,20 @@ class CallPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor,
       body: Center(
         child: FutureBuilder<Contact>(
           future: DBprovider.db.getContactByNumberPhone(numberPhone),
           builder: (context, snapshot) {
-            print(snapshot.data);
             if(snapshot.data == null) {
               return Text(numberPhone,style: const TextStyle(color: backgroundColor));
             }
-            return Text(snapshot.data!.firstName, style: const TextStyle(color: backgroundColor));
+            return ClipRRect(
+              
+              child: Text(snapshot.data!.firstName, style: const TextStyle(color: backgroundColor)));
           
           }),
       ),
-      backgroundColor: accentColor,
     );
   }
 }
